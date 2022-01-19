@@ -27,20 +27,26 @@ public class Client {
     private String lastname;
     @Column(name = "dv_document")
     private Long document;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "dv_dobe")
+    private Date dobe;
     @Column(name = "dv_phoneNumber")
     private String phoneNumber;
-    @Column(name = "dv_address")
-    private String address;
+    @Column(name = "dv_adress")
+    private String adress;
     @Column(name = "dv_email")
     private String email;
     @Column(name = "dv_password")
     private String password;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dv_load")
-    private Date load;
+    @Column(name = "dv_createDate")
+    private Date createDate;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dv_edit")
-    private Date edit;
+    @Column(name = "dv_updateDate")
+    private Date updateDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "dv_lastLogin")
+    private Date lastLogin;
     @Column(name = "dv_statusClient")
     private Boolean statusClient;
     @Column(name = "dv_rol")
@@ -49,4 +55,13 @@ public class Client {
     @OneToOne
     private Photo photo;
 
+    
+    /*
+- dob: date
+
+     * */
+    
+    
+    
+    
 }
