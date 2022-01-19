@@ -54,14 +54,4 @@ public class Client {
 
     @OneToOne
     private Photo photo;
-
-    
-    /*
-- dob: date
-
-     * */
-    
-    
-    
-    
 }
