@@ -19,8 +19,6 @@ public class Product {
 	private String id;
 	@Column(name = "dv_name")
 	private String name;
-	@Column(name = "dv_type")
-	private String type;
 	@Column(name = "dv_status")
     private Status status;
 	@Column(name = "dv_waist")

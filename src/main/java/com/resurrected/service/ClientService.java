@@ -43,10 +43,10 @@ public class ClientService implements UserDetailsService {
 	
 
 	@Transactional
-	public Client createClient(String name, String lastname, Long document, String phoneNumber, String address,
+	public Client createClient(String name, String lastname, Long document, String phoneNumber, Date dobe, String adress,
 			String email, String password1, String password2, MultipartFile file) throws ErrorService {
 	
-		checkData(name, lastname, document, phoneNumber, address, email, password1, password2);
+		checkData(name, lastname, document, phoneNumber, adress, email, password1, password2);
 
 		Client client = new Client();
 
@@ -55,11 +55,11 @@ public class ClientService implements UserDetailsService {
 		client.setLastname(lastname);
 		client.setDocument(document);
 		client.setPhoneNumber(phoneNumber);
-		client.setAddress(address);
+		client.setAdress(adress);
 		client.setEmail(email);
 		String encrypted = new BCryptPasswordEncoder().encode(password1);
 		client.setPassword(encrypted);
-		client.setLoad(new Date());
+		client.setCreateDate(new Date());
 		client.setStatusClient(true);
 		client.setRol(Rol.CLIENT);
 		Photo photo = photoService.multiPartToEntity(file);
@@ -85,11 +85,11 @@ public class ClientService implements UserDetailsService {
 			client.setLastname(lastname);
 			client.setDocument(document);
 			client.setPhoneNumber(phoneNumber);
-			client.setAddress(address);
+			client.setAdress(address);
 			client.setEmail(email);
 			String encrypted = new BCryptPasswordEncoder().encode(password1);
 			client.setPassword(encrypted);
-			client.setEdit(new Date());
+			client.setUpdateDate(new Date());
 			client.setStatusClient(true);
 			Photo photo = photoService.multiPartToEntity(file);
 			client.setPhoto(photo);

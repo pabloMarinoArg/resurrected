@@ -10,8 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.resurrected.entity.Description;
+import com.resurrected.entity.Dress;
 import com.resurrected.entity.Photo;
 import com.resurrected.entity.Product;
+import com.resurrected.entity.RawMaterials;
+import com.resurrected.entity.Status;
+import com.resurrected.entity.Waist;
 import com.resurrected.error.ErrorService;
 import com.resurrected.repository.ProductRepository;
 
@@ -26,17 +31,20 @@ public class ProductService {
 	private PhotoService photoService;
 
 	@Transactional
-	public Product createProduct(MultipartFile file, String name, String type, Integer portion, Integer price,
-			Integer stock) throws ErrorService {
+	public Product createProduct(MultipartFile file, String name, Waist waist, Dress dress, Description description,
+			RawMaterials rawMaterials, Double cost, Double price, Integer stock, Double iva) throws ErrorService {
 
 		Product product = new Product();
 		product.setName(name);
-		product.setType(type);
-		product.setPortion(portion);
-		product.setStatus(true);
+		product.setWaist(waist);
+		product.setDress(dress);
+		product.setDescription(description);
+		product.setRawMaterials(rawMaterials);
+		product.setCost(cost);
 		product.setPrice(price);
 		product.setStock(stock);
-		product.setLoad(new Date());
+		product.setIva(iva);
+		product.setCreateDate(new Date());
 		Photo photo = photoService.multiPartToEntity(file);
 		product.setPhoto(photo);
 
@@ -45,8 +53,8 @@ public class ProductService {
 	}
 
 	@Transactional
-	public Product editProduct(String idProduct, MultipartFile file, String name, String type, Integer portion,
-			Integer price, Integer stock) throws ErrorService {
+	public Product editProduct(String idProduct, MultipartFile file, String name, Waist waist, Dress dress, Description description,
+			RawMaterials rawMaterials, Double cost, Double price, Integer stock, Double iva) throws ErrorService {
 
 		Optional<Product> checkP = productRepository.findById(idProduct);
 
@@ -54,12 +62,15 @@ public class ProductService {
 
 			Product product = checkP.get();
 			product.setName(name);
-			product.setType(type);
-			product.setPortion(portion);
-			product.setStatus(true);
+			product.setWaist(waist);
+			product.setDress(dress);
+			product.setDescription(description);
+			product.setRawMaterials(rawMaterials);
+			product.setCost(cost);
 			product.setPrice(price);
 			product.setStock(stock);
-			product.setEdit(new Date());
+			product.setIva(iva);
+			product.setCreateDate(new Date());
 			Photo photo = photoService.multiPartToEntity(file);
 			product.setPhoto(photo);
 
@@ -102,7 +113,7 @@ public class ProductService {
 	public Product active(String idProduct) throws ErrorService {
 		Optional<Product> check = productRepository.findById(idProduct);
 		Product product = check.get();
-		product.setStatus(true);
+		product.setStatus(Status.Disponible);
 		return productRepository.save(product);
 	}
 
@@ -110,9 +121,29 @@ public class ProductService {
 	public Product passive(String idProduct) throws ErrorService {
 		Optional<Product> check = productRepository.findById(idProduct);
 		Product product = check.get();
-		product.setStatus(false);
+		product.setStatus(Status.Agotado);
 		return productRepository.save(product);
 	}
+	
+	@Transactional
+	public Product coming(String idProduct) throws ErrorService {
+		Optional<Product> check = productRepository.findById(idProduct);
+		Product product = check.get();
+		product.setStatus(Status.Proximamente);
+		return productRepository.save(product);
+	}
+	
+	@Transactional
+	public Product pending(String idProduct) throws ErrorService {
+		Optional<Product> check = productRepository.findById(idProduct);
+		Product product = check.get();
+		product.setStatus(Status.Pendiente);
+		return productRepository.save(product);
+	}
+	
+	
+	
+	
 
 	@Transactional(readOnly = true)
 	public List<Product> findTrue() {
