@@ -8,6 +8,8 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.resurrected.enums.Example;
+
 import lombok.Data;
 
 @Entity

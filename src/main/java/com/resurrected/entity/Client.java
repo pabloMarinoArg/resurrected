@@ -10,6 +10,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.resurrected.enums.Rol;
+
 import lombok.Data;
 
 @Entity

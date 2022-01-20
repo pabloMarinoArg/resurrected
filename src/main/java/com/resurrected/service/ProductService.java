@@ -7,16 +7,17 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.resurrected.entity.Description;
-import com.resurrected.entity.Dress;
 import com.resurrected.entity.Photo;
 import com.resurrected.entity.Product;
-import com.resurrected.entity.RawMaterials;
-import com.resurrected.entity.Status;
 import com.resurrected.entity.Waist;
+import com.resurrected.enums.Description;
+import com.resurrected.enums.Dress;
+import com.resurrected.enums.RawMaterials;
+import com.resurrected.enums.Status;
 import com.resurrected.error.ErrorService;
 import com.resurrected.repository.ProductRepository;
 
@@ -30,7 +31,7 @@ public class ProductService {
 	@Autowired
 	private PhotoService photoService;
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Product createProduct(MultipartFile file, String name, Waist waist, Dress dress, Description description,
 			RawMaterials rawMaterials, Double cost, Double price, Integer stock, Double iva) throws ErrorService {
 
@@ -52,7 +53,7 @@ public class ProductService {
 
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Product editProduct(String idProduct, MultipartFile file, String name, Waist waist, Dress dress, Description description,
 			RawMaterials rawMaterials, Double cost, Double price, Integer stock, Double iva) throws ErrorService {
 
@@ -95,7 +96,7 @@ public class ProductService {
 
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void removeProduct(String idProduct) throws ErrorService {
 
 		Optional<Product> check = productRepository.findById(idProduct);
@@ -109,7 +110,7 @@ public class ProductService {
 
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Product active(String idProduct) throws ErrorService {
 		Optional<Product> check = productRepository.findById(idProduct);
 		Product product = check.get();
@@ -117,7 +118,7 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Product passive(String idProduct) throws ErrorService {
 		Optional<Product> check = productRepository.findById(idProduct);
 		Product product = check.get();
@@ -125,7 +126,7 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 	
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Product coming(String idProduct) throws ErrorService {
 		Optional<Product> check = productRepository.findById(idProduct);
 		Product product = check.get();
@@ -133,7 +134,7 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 	
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Product pending(String idProduct) throws ErrorService {
 		Optional<Product> check = productRepository.findById(idProduct);
 		Product product = check.get();

@@ -6,6 +6,11 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.resurrected.enums.Description;
+import com.resurrected.enums.Dress;
+import com.resurrected.enums.RawMaterials;
+import com.resurrected.enums.Status;
+
 import lombok.Data;
 
 @Data

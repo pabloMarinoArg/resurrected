@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -21,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.resurrected.entity.Client;
 import com.resurrected.entity.Photo;
-import com.resurrected.entity.Rol;
+import com.resurrected.enums.Rol;
 import com.resurrected.error.ErrorService;
 import com.resurrected.repository.ClientRepository;
 
@@ -42,7 +43,7 @@ public class ClientService implements UserDetailsService {
 	
 	
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Client createClient(String name, String lastname, Long document, String phoneNumber, Date dobe, String adress,
 			String email, String password1, String password2, MultipartFile file) throws ErrorService {
 	
@@ -70,7 +71,7 @@ public class ClientService implements UserDetailsService {
 
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Client editClient(String idClient, MultipartFile file, String name, String lastname, Long document,
 			String phoneNumber, String address, String email, String password1, String password2) throws ErrorService {
 
@@ -104,7 +105,7 @@ public class ClientService implements UserDetailsService {
 	}
 	
 	
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void removeClient(String idClient) {
 		Optional<Client> check = clientRepository.findById(idClient);
 		if (check != null) {
@@ -114,7 +115,7 @@ public class ClientService implements UserDetailsService {
 
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void active(String idClient) {
 		Optional<Client> check = clientRepository.findById(idClient);
 		if (check != null) {
@@ -124,7 +125,7 @@ public class ClientService implements UserDetailsService {
 		}
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void passive(String idClient) {
 		Optional<Client> check = clientRepository.findById(idClient);
 		if (check != null) {

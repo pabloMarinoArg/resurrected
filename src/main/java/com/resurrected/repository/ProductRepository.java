@@ -27,7 +27,9 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 	@Query("SELECT a FROM Product a")
 	public List<Product>findAllS();
 	
-	
+	@Query("SELECT a FROM Product u WHERE u.name LIKE %:q%"
+			)
+	public List<Product> findAll(String q);
 	
 
 }
