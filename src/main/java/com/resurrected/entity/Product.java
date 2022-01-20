@@ -6,6 +6,11 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.resurrected.enums.Description;
+import com.resurrected.enums.Dress;
+import com.resurrected.enums.RawMaterials;
+import com.resurrected.enums.Status;
+
 import lombok.Data;
 
 @Data
@@ -19,8 +24,6 @@ public class Product {
 	private String id;
 	@Column(name = "dv_name")
 	private String name;
-	@Column(name = "dv_type")
-	private String type;
 	@Column(name = "dv_status")
     private Status status;
 	@Column(name = "dv_waist")

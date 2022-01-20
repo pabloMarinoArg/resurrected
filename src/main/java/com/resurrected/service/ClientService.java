@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -21,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.resurrected.entity.Client;
 import com.resurrected.entity.Photo;
-import com.resurrected.entity.Rol;
+import com.resurrected.enums.Rol;
 import com.resurrected.error.ErrorService;
 import com.resurrected.repository.ClientRepository;
 
@@ -42,11 +43,11 @@ public class ClientService implements UserDetailsService {
 	
 	
 
-	@Transactional
-	public Client createClient(String name, String lastname, Long document, String phoneNumber, String address,
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public Client createClient(String name, String lastname, Long document, String phoneNumber, Date dobe, String adress,
 			String email, String password1, String password2, MultipartFile file) throws ErrorService {
 	
-		checkData(name, lastname, document, phoneNumber, address, email, password1, password2);
+		checkData(name, lastname, document, phoneNumber, adress, email, password1, password2);
 
 		Client client = new Client();
 
@@ -55,11 +56,11 @@ public class ClientService implements UserDetailsService {
 		client.setLastname(lastname);
 		client.setDocument(document);
 		client.setPhoneNumber(phoneNumber);
-		client.setAddress(address);
+		client.setAdress(adress);
 		client.setEmail(email);
 		String encrypted = new BCryptPasswordEncoder().encode(password1);
 		client.setPassword(encrypted);
-		client.setLoad(new Date());
+		client.setCreateDate(new Date());
 		client.setStatusClient(true);
 		client.setRol(Rol.CLIENT);
 		Photo photo = photoService.multiPartToEntity(file);
@@ -70,7 +71,7 @@ public class ClientService implements UserDetailsService {
 
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Client editClient(String idClient, MultipartFile file, String name, String lastname, Long document,
 			String phoneNumber, String address, String email, String password1, String password2) throws ErrorService {
 
@@ -85,11 +86,11 @@ public class ClientService implements UserDetailsService {
 			client.setLastname(lastname);
 			client.setDocument(document);
 			client.setPhoneNumber(phoneNumber);
-			client.setAddress(address);
+			client.setAdress(address);
 			client.setEmail(email);
 			String encrypted = new BCryptPasswordEncoder().encode(password1);
 			client.setPassword(encrypted);
-			client.setEdit(new Date());
+			client.setUpdateDate(new Date());
 			client.setStatusClient(true);
 			Photo photo = photoService.multiPartToEntity(file);
 			client.setPhoto(photo);
@@ -104,7 +105,7 @@ public class ClientService implements UserDetailsService {
 	}
 	
 	
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void removeClient(String idClient) {
 		Optional<Client> check = clientRepository.findById(idClient);
 		if (check != null) {
@@ -114,7 +115,7 @@ public class ClientService implements UserDetailsService {
 
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void active(String idClient) {
 		Optional<Client> check = clientRepository.findById(idClient);
 		if (check != null) {
@@ -124,7 +125,7 @@ public class ClientService implements UserDetailsService {
 		}
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void passive(String idClient) {
 		Optional<Client> check = clientRepository.findById(idClient);
 		if (check != null) {
