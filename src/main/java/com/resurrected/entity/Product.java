@@ -10,6 +10,7 @@ import com.resurrected.enums.Description;
 import com.resurrected.enums.Dress;
 import com.resurrected.enums.RawMaterials;
 import com.resurrected.enums.Status;
+import com.resurrected.enums.Waist;
 
 import lombok.Data;
 

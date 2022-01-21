@@ -13,11 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.resurrected.entity.Photo;
 import com.resurrected.entity.Product;
-import com.resurrected.entity.Waist;
 import com.resurrected.enums.Description;
 import com.resurrected.enums.Dress;
 import com.resurrected.enums.RawMaterials;
 import com.resurrected.enums.Status;
+import com.resurrected.enums.Waist;
 import com.resurrected.error.ErrorService;
 import com.resurrected.repository.ProductRepository;
 
