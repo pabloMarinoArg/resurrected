@@ -23,11 +23,12 @@ public class Supplier {
     private String id;
     @Column(name = "dv_enterprise")
     private String enterprise;
-    @Column(name = "dv_client")
-    private Client client;
+    
     @Column(name = "dv_example")
     private Example example;
 
+    @OneToOne
+    private Client client;
     @OneToOne
     private Photo photo;
 }

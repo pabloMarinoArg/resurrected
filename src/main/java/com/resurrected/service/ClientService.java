@@ -44,7 +44,7 @@ public class ClientService implements UserDetailsService {
 	
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Client createClient(String name, String lastname, Long document, String phoneNumber, Date dobe, String adress,
+	public Client createClient(String name, String lastname, Long document, String phoneNumber, String adress,
 			String email, String password1, String password2, MultipartFile file) throws ErrorService {
 	
 		checkData(name, lastname, document, phoneNumber, adress, email, password1, password2);
