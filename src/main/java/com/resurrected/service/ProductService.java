@@ -145,31 +145,31 @@ public class ProductService {
 	
 	
 	
-
-	@Transactional(readOnly = true)
-	public List<Product> findTrue() {
-		return productRepository.findTrue();
-	}
-
-	@Transactional(readOnly = true)
-	public List<Product> findFalse() {
-		return productRepository.findFalse();
-	}
-
-	@Transactional(readOnly = true)
-	public List<Product> findAll() {
-		return productRepository.findAll();
-	}
-
-	@Transactional(readOnly = true)
-	public List<Product> findAllS() {
-		return productRepository.findAllS();
-	}
-
-	@Transactional(readOnly = true)
-	public Product findId(String idProduct) {
-		return productRepository.findId(idProduct);
-	}
+//
+//	@Transactional(readOnly = true)
+//	public List<Product> findTrue() {
+//		return productRepository.findTrue();
+//	}
+//
+//	@Transactional(readOnly = true)
+//	public List<Product> findFalse() {
+//		return productRepository.findFalse();
+//	}
+//
+//	@Transactional(readOnly = true)
+//	public List<Product> findAll() {
+//		return productRepository.findAll();
+//	}
+//
+//	@Transactional(readOnly = true)
+//	public List<Product> findAllS() {
+//		return productRepository.findAllS();
+//	}
+//
+//	@Transactional(readOnly = true)
+//	public Product findId(String idProduct) {
+//		return productRepository.findId(idProduct);
+//	}
 
 	@Transactional(readOnly = true)
 	public Optional<Product> findIdP(String idProduct) {

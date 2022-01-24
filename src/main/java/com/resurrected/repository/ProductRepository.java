@@ -14,22 +14,17 @@ import com.resurrected.entity.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
 
-	@Query("SELECT a FROM Product a WHERE a.status=true")
-	public List<Product> findTrue();
 
-	@Query("SELECT a FROM Product a WHERE a.status=false")
-	public List<Product> findFalse();
 	
-	
-	@Query("SELECT a FROM Product a WHERE a.id=:idS")
-	public Product findId(@Param("id")String idS);
+//	@Query("SELECT a FROM Product a WHERE a.id=:idS")
+//	public Product findId(@Param("id")String idS);
 	
 	@Query("SELECT a FROM Product a")
 	public List<Product>findAllS();
 	
-	@Query("SELECT a FROM Product u WHERE u.name LIKE %:q%"
-			)
-	public List<Product> findAll(String q);
+//	@Query("SELECT a FROM Product u WHERE u.name LIKE %:q%"
+	//		)
+//	public List<Product> findAll(String q);
 	
 
 }
