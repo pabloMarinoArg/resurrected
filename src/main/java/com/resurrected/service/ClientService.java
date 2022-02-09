@@ -201,13 +201,10 @@ public class ClientService implements UserDetailsService {
 	public void checkData(String name, String lastname, Long document, String phoneNumber, String address, String email,
 			String password1, String password2) throws ErrorService {
 
-		Client check = clientRepository.findEmail(email);
-		Client check1 = clientRepository.findDni(document);
-		Client check2 = clientRepository.findPhoneNumber(phoneNumber);
-		if (check != null) {
+		if (clientRepository.findEmail(email) != null) {
 			throw new ErrorService("El email que ingreso ya esta en uso, ingrese uno nuevo");
 		}
-		if (check1 != null) {
+		if (clientRepository.findDni(document) != null) {
 			throw new ErrorService("El Dni que ingreso ya esta en uso, ingrese uno nuevo");
 		}
 
@@ -215,7 +212,7 @@ public class ClientService implements UserDetailsService {
 			throw new ErrorService("El documento no puede estar vacio o" + " contener menos de 8 caracteres numericos");
 		}
 
-		if (check2 != null) {
+		if (clientRepository.findPhoneNumber(phoneNumber) != null) {
 			throw new ErrorService("El Telefono que ingreso ya esta en uso, ingrese uno nuevo");
 		}
 
