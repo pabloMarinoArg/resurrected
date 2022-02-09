@@ -30,8 +30,8 @@ public class Client {
     @Column(name = "dv_document")
     private Long document;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dv_dobe")
-    private Date dobe;
+    @Column(name = "dv_dob")
+    private Date dob;
     @Column(name = "dv_phoneNumber")
     private String phoneNumber;
     @Column(name = "dv_adress")

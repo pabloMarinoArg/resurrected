@@ -66,7 +66,7 @@ public class ClientService implements UserDetailsService {
 		Photo photo = photoService.multiPartToEntity(file);
 		client.setPhoto(photo);
 		
-		emailNotifications.sendEmail("Gracias por registrarte", "Bienvenido", email);
+		emailNotifications.sendEmail("Gracias por registrarte a Resurrected", "Bienvenido", email);
 		return clientRepository.save(client);
 
 	}
@@ -200,6 +200,7 @@ public class ClientService implements UserDetailsService {
 
 	public void checkData(String name, String lastname, Long document, String phoneNumber, String address, String email,
 			String password1, String password2) throws ErrorService {
+
 
 		if (clientRepository.findEmail(email) != null) {
 			throw new ErrorService("El email que ingreso ya esta en uso, ingrese uno nuevo");
