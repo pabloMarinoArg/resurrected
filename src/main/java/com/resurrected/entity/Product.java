@@ -6,11 +6,10 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.resurrected.enums.Description;
-import com.resurrected.enums.Dress;
+
 import com.resurrected.enums.RawMaterials;
 import com.resurrected.enums.Status;
-import com.resurrected.enums.Waist;
+
 
 import lombok.Data;
 
@@ -28,16 +27,16 @@ public class Product {
 	@Column(name = "dv_status")
     private Status status;
 	@Column(name = "dv_waist")
-    private Waist waist;
-	@Column(name = "dv_dress")
-    private Dress dress;
+    private String waist;
+	@Column(name = "dv_category")
+    private String category;
 	@Column(name = "dv_description")
-    private Description description;
+    private String description;	
 	@Column(name = "dv_rawMaterials")
     private RawMaterials rawMaterials;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "dv_publishedDate")
-	private Date publisherDate;
+	@Column(name = "dv_publishDate")
+	private Date publishDate;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dv_createDate")
 	private Date createDate;
@@ -52,10 +51,7 @@ public class Product {
 	private Integer stock;
 	@Column(name = "dv_iva")
 	private Double iva;
-	@ManyToOne
-	@JoinColumn(name = "ticket")
-	private Ticket ticket;
-
+	
 	@OneToOne
 	private Photo photo;
 	
