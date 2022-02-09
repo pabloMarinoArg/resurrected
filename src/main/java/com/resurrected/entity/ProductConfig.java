@@ -21,7 +21,7 @@ public class ProductConfig {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-	
+
 	@Column(name = "dv_type")
 	private String type;
 	@Column(name = "dv_name")
@@ -29,7 +29,7 @@ public class ProductConfig {
 	@Column(name = "dv_description")
 	private String description;
 	@Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dv_createDate")
-    private Date createDate;
-	
+	@Column(name = "dv_createDate")
+	private Date createDate;
+
 }
